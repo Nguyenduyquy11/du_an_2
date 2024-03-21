@@ -1,0 +1,83 @@
+<?php
+    namespace App\controller\Client;
+   use App\model\Client\ClientModel;
+    class ClientController extends ClientBaseController{
+        protected $modelClient;
+        function __construct()
+        {
+            $this->modelClient = new ClientModel();
+        }
+        function index(){
+            $getAllSp = $this->modelClient->getALLSanPham();
+            return $this->render('Client.layout.header', ['getAllSp' => $getAllSp]);
+        }
+        function formdangnhap(){
+            return $this->render('Client.layout.taikhoan.dangnhap');
+        }
+        function dangnhapTK(){
+            if(isset($_POST['dangnhap'])){
+                $checkuser = $this->modelClient->dangnhap($_POST['tendangnhap'],$_POST['matkhau']);
+                if(is_array($checkuser)){
+                    $_SESSION['taikhoan'] = $checkuser;
+                    echo "<script>
+                            alert('Đăng nhập thành công!');
+                            window.location.href = 'index.php';
+                        </script>";
+                }else{
+                    echo $thongbao = "Tài khoản không tồn tại";
+                }
+            }
+        }
+        function formdangky(){
+            return $this->render('Client.layout.taikhoan.dangky');
+        }
+        function dangkyTK(){
+            if(isset($_POST['dangky'])){
+                $this->modelClient->dangky($_POST['hoten'],$_POST['tendangnhap'],$_POST['matkhau'],$_POST['sdt']);
+            }
+            echo "<script>
+                        alert('Đăng ký thành công! Vui lòng đăng nhập');
+                        window.location.href = 'index.php';
+                    </script>";
+        }
+        function dangxuat(){
+            session_unset();
+            header("Location: index.php");
+        }
+        function formaccount(){
+             return $this->render('Client.layout.taikhoan.myaccount');
+         }
+         function editTK(){
+            if(isset($_POST['editTK'])){
+                $this->modelClient->updateTaiKhoan($_POST['id'],$_POST['hoten'],$_POST['tendangnhap'],$_POST['matkhau'],$_POST['sdt']);
+                $_SESSION['taikhoan'] = $this->modelClient->dangnhap($_POST['tendangnhap'],$_POST['matkhau']);
+                // header("Location: index.php");
+            }
+            echo "<script>
+                        alert('Cập nhật thành công!');
+                        window.location.href = 'myaccount';
+                    </script>";
+         }
+         function formgiohang(){
+            return $this->render('Client.layout.giohang.giohang');
+         }
+         function sanphamct(){
+           if(isset($_GET['id'])){
+            $oneSanPham = $this->modelClient->getOneSanPham($_GET['id']);
+            return $this->render('Client.layout.sanpham.sanphamct', ['oneSanPham' => $oneSanPham]);
+           }
+         }
+         function formlienhe(){
+            return $this->render('Client.layout.lienhe.index');
+         }
+         function addLH(){
+            if(isset($_POST['addlienhe'])){
+                $this->modelClient->addLienHe($_POST['ten'],$_POST['email'],$_POST['noidung']);
+                echo "<script>
+                alert('Cập nhật thành công!');
+                window.location.href = 'formlienhe';
+            </script>";
+            }
+         }
+    }
+?>

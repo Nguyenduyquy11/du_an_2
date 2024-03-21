@@ -1,0 +1,18 @@
+{
+    "name": "quynd/ph",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nguyenduyquy11",
+            "email": "quynguyenduy150@gmail.com"
+        }
+    ],
+    "require": {
+        "phroute/phroute": "^2.2",
+        "eftec/bladeone": "^4.12"
+    }
+}

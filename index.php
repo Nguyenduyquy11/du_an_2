@@ -5,4 +5,5 @@ session_start();
     require_once 'app/common/route.php';
     echo "Nguyễn Duy Quý đẹp trai vãi ò";
     echo "Anh Quy dep trai nhat Viet Nam";
+    echo "Anh quý không những đẹp trai lại còn tốt bụng";
 ?>

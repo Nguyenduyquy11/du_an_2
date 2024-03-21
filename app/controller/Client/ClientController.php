@@ -77,7 +77,6 @@
                 alert('Cập nhật thành công!');
                 window.location.href = 'formlienhe';
             </script>";
-                echo "Bạn là một thằng điên ";
             }
          }
     }

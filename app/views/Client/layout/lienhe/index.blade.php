@@ -1,31 +1,24 @@
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Liên hệ</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <style>
         .btn-search {
             min-width: 100px;
-            /* Điều chỉnh kích thước chiều rộng của nút */
         }
 
         * {
-            box-sizing: border-box
+            box-sizing: border-box;
         }
 
-        /* Đẩy nút "Đăng nhập" sang phải */
         .navbar-nav .login-btn {
             margin-left: auto;
         }
 
-        /* Thêm biểu tượng icon */
-        .login-icon {
-            margin-right: 5px;
-        }
-
-        /* Custom styles for footer */
         footer {
             background-color: #f8f9fa;
             padding: 20px 0;
@@ -36,7 +29,6 @@
 
         .card {
             height: 100%;
-            /* Thiết lập chiều cao của thẻ card */
         }
 
         .product-wrapper {
@@ -47,21 +39,18 @@
 
         .product-item {
             flex: 0 0 calc(25% - 1rem);
-            /* Đặt kích thước của mỗi ô sản phẩm */
             margin-bottom: 2rem;
-            /* Khoảng cách giữa các ô sản phẩm */
         }
     </style>
 </head>
-
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
-            <a class="navbar-brand" href="index"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrLnCBOxLUndyDnLhApSKbVX17IYayufW9mw6EewH6Y_Bco3w0Z0sbLK1Dmar7tNipLJ0&usqp=CAU" alt="Logo" height="40"></a>
+            <a class="navbar-brand" href="index"><img src="./app/img/—Pngtree—am or ma abstract_6950476.png" alt="Logo" height="60" width="60"></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="index">Trang chủ</a>
@@ -71,12 +60,11 @@
                             Sản phẩm
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="productDropdown">
-                            <li><a class="dropdown-item" href="#">Sản phẩm 1</a></li>
-                            <li><a class="dropdown-item" href="#">Sản phẩm 2</a></li>
-                            <li><a class="dropdown-item" href="#">Sản phẩm 3</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
+                            <li><a class="dropdown-item" href="#">Áo</a></li>
+                            <li><a class="dropdown-item" href="#">Quần</a></li>
+                            <li><a class="dropdown-item" href="#">Dép</a></li>
+                            <li><a class="dropdown-item" href="#">Mũ</a></li>
+                            <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Xem tất cả sản phẩm</a></li>
                         </ul>
                     </li>
@@ -88,18 +76,14 @@
                     </li>
                 </ul>
                 <!-- Form tìm kiếm -->
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
-                    <button class="btn btn-outline-success btn-search" type="submit">Tìm kiếm</button>
+                <form class="form-inline my-2 my-lg-0 mr-auto">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Tìm kiếm">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Tìm kiếm</button>
                 </form>
                 <!-- Nút "Đăng nhập" -->
                 <?php if (isset($_SESSION['taikhoan'])) { ?>
                     <?php extract($_SESSION['taikhoan']); ?>
-
-
-
                     <ul class="navbar-nav login-btn">
-
                         <li class="nav-item">
                             <a class="nav-link" href="formgiohang"> <button class="btn btn-info">Giỏ hàng</button></a>
                         </li>
@@ -114,8 +98,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="myaccount"><button class="btn btn-info">Tài khoản</button></a>
                         </li>
-
-
                     <?php } else { ?>
                     </ul>
                     <!-- Nút "Đăng ký" -->
@@ -147,6 +129,7 @@
                 <textarea class="form-control" name="noidung" id="message" rows="5" placeholder="Nhập nội dung"></textarea>
             </div>
             <button type="submit" name="addlienhe" class="btn btn-primary">Gửi</button>
+
         </form>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

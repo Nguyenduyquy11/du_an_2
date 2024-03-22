@@ -174,14 +174,14 @@
       </div>
     </div>
   </div>
-  <div class="container">
+  <div class="container-xxl">
     <h1 class="mt-5 mb-4">Sản phẩm</h1>
     <div class="product-wrapper row">
       <?php foreach ($getAllSp as $key => $value) { ?>
         <?php extract($value); ?>
         <div class="col-md-3 mb-3 product-item">
           <div class="card">
-           <a href="sanphamct&id={{$value['id']}}"> <img src="<?php echo $anh_sp ?>" width="300px" height="300px" class="card-img-top" alt="..."></a>
+           <a href="sanphamct&id={{$value['id']}}"> <img src="<?php echo $anh_sp ?>" width="200px" height="300px" class="card-img-top" alt="..."></a>
             <div class="card-body">
               <a href="sanphamct&id={{$value['id']}}"><h5 class="card-title"><?php echo $ten_san_pham ?></h5></a>
               <p class="card-text"><?php echo $mo_ta ?></p>

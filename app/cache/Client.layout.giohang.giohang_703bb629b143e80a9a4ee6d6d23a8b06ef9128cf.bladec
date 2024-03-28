@@ -5,7 +5,9 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Shopping Cart</title>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
  <style>
  .btn-search {
  min-width: 100px;
@@ -63,7 +65,7 @@
 <body>
  <nav class="navbar navbar-expand-lg navbar-light bg-light">
  <div class="container">
- <a class="navbar-brand" href="index"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrLnCBOxLUndyDnLhApSKbVX17IYayufW9mw6EewH6Y_Bco3w0Z0sbLK1Dmar7tNipLJ0&usqp=CAU" alt="Logo" height="40"></a>
+ <a class="navbar-brand" href="index"><img src="./app/img/—Pngtree—am or ma abstract_6950476.png" alt="Logo" height="60" width="60"></a>
  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
  <span class="navbar-toggler-icon"></span>
  </button>
@@ -77,13 +79,13 @@
  Sản phẩm
  </a>
  <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="productDropdown">
- <li><a class="dropdown-item" href="#">Sản phẩm 1</a></li>
- <li><a class="dropdown-item" href="#">Sản phẩm 2</a></li>
- <li><a class="dropdown-item" href="#">Sản phẩm 3</a></li>
+ <?php foreach ($getAllDM as $key => $value) { ?>
+ <li><a class="dropdown-item" href="sanpham-dmsp&id=<?php echo \htmlentities($value['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"><?php echo \htmlentities($value['ten_danh_muc']??'', ENT_QUOTES, 'UTF-8', false); ?></a></li>
+ <?php } ?>
  <li>
  <hr class="dropdown-divider">
  </li>
- <li><a class="dropdown-item" href="#">Xem tất cả sản phẩm</a></li>
+ <li><a class="dropdown-item" href="allsanpham">Xem tất cả sản phẩm</a></li>
  </ul>
  </li>
  <li class="nav-item">
@@ -138,46 +140,45 @@
  </div>
  </nav> <br>
  <div class="container">
- <h2>Shopping Cart</h2>
+ <h2>Giỏ hàng</h2>
  <div class="row">
  <div class="col-md-8">
  <table class="table">
  <thead>
  <tr>
- <th>Product</th>
- <th>Price</th>
- <th>Quantity</th>
- <th>Total</th>
+ <th>Ảnh sản phẩm</th>
+ <th>Sản phẩm</th>
+ <th>Giá</th>
+ <th>Số lượng</th>
+ <th>Thành tiền</th>
+ <th>Thao tác</th>
  </tr>
  </thead>
+ <?php foreach ($_SESSION['my_cart'] as $key => $value) { ?>
  <tbody>
+ 
  <tr>
  <td>
- <img src="product1.jpg" alt="Product 1" class="product-img"> Product 1
+ <img src="<?php echo $value['3'] ?>" width="100px" height="100px" class="product-img">
  </td>
- <td>$50.00</td>
- <td>2</td>
- <td>$100.00</td>
- </tr>
- <tr>
- <td>
- <img src="product2.jpg" alt="Product 2" class="product-img"> Product 2
- </td>
- <td>$30.00</td>
- <td>1</td>
- <td>$30.00</td>
+ <td><?php echo $value['1'] ?></td>
+ <td><?php echo $value['2']. ' <strong style="color: red;">VNĐ</strong>' ?></td>
+ <td><?php echo $value['4']  ?></td>
+ <td><?php echo $value['5']. ' <strong style="color: red;">VNĐ</strong>' ?></td>
+ <td><a href="delSpCart?idsp=<?php $value['0'] ?>"><button type="submit" class="btn btn-danger">Xóa</button></a></td>
  </tr>
  <!-- Add more rows for other products -->
  </tbody>
+ <?php } ?>
  </table>
  </div>
  <div class="col-md-4">
  <div class="card">
  <div class="card-body">
- <h5 class="card-title">Cart Summary</h5>
- <p class="card-text">Total Items: 3</p>
- <p class="card-text">Total Price: $130.00</p>
- <a href="#" class="btn btn-primary">Checkout</a>
+ <h5 class="card-title">Tóm tắt giỏ hàng</h5>
+ <p class="card-text">Tổng số mặt hàng: 3</p>
+ <p class="card-text">Tổng giá: $130,00</p>
+ <a href="#" class="btn btn-primary">Thanh toán</a>
  </div>
  </div>
  </div>

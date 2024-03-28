@@ -11,6 +11,19 @@
             $sql = "SELECT *FROM sanpham WHERE id = '$id'";
             return $this->getAllData($sql);
         }
+        function getOneDanhMuc($id){
+            $sql = "SELECT *FROM danhmuc WHERE id = '$id'";
+            return $this->getAllData($sql);
+        }
+        function loaddsp_dm($dmid){
+            $sql = "SELECT *FROM sanpham WHERE danh_muc_id = '$dmid'";
+            return $this->getAllData($sql);
+        }
+        //Danh mục
+        function getAllDanhMuc(){
+            $sql = "SELECT *FROM danhmuc";
+            return $this->getAllData($sql);
+        }
         //Tài khoản
         function dangky($hoten,$tendangnhap,$matkhau,$sdt,){
             $sql = "INSERT INTO taikhoan (ho_ten_nguoi_dung,ten_dang_nhap,mat_khau,sdt) VALUES ('$hoten','$tendangnhap','$matkhau','$sdt')";
@@ -23,6 +36,10 @@
         function updateTaiKhoan($id, $hotennguoidung,$tendangnhap,$matkhau,$sdt){
             $sql = "UPDATE taikhoan SET ho_ten_nguoi_dung = '$hotennguoidung' ,
             ten_dang_nhap = '$tendangnhap' , mat_khau = '$matkhau' , sdt = '$sdt' WHERE id = '$id'";
+            return $this->getRowData($sql);
+        }
+        function checkMK($tendangnhap){
+            $sql = "SELECT *FROM taikhoan WHERE ten_dang_nhap = '$tendangnhap'";
             return $this->getRowData($sql);
         }
         //Liên hệ

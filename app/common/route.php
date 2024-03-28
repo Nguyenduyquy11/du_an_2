@@ -50,6 +50,9 @@ $router->get('/', [App\controller\Client\ClientController::class, 'index']);
 $router->get('index', [App\controller\Client\ClientController::class, 'index']);
 $router->get('formdangnhap', [App\controller\Client\ClientController::class, 'formdangnhap']);
 $router->get('formdangky', [App\controller\Client\ClientController::class, 'formdangky']);
+$router->get('formquenmk', [App\controller\Client\ClientController::class, 'formquenMK']);
+$router->post('quenmk', [App\controller\Client\ClientController::class, 'quenMK']);
+//San Pham
 $router->post('dangky', [App\controller\Client\ClientController::class, 'dangkyTK']);
 $router->post('dangnhap', [App\controller\Client\ClientController::class, 'dangnhapTK']);
 $router->get('dangxuat', [App\controller\Client\ClientController::class, 'dangxuat']);
@@ -57,6 +60,13 @@ $router->get('myaccount', [App\controller\Client\ClientController::class, 'forma
 $router->post('editTK', [App\controller\Client\ClientController::class, 'editTK']);
 $router->get('formgiohang', [App\controller\Client\ClientController::class, 'formgiohang']);
 $router->get('sanphamct', [App\controller\Client\ClientController::class, 'sanphamct']);
+$router->get('sanpham-dmsp', [App\controller\Client\ClientController::class, 'sanphamDM']);
+$router->get('allsanpham', [App\controller\Client\ClientController::class, 'allSanPham']);
+$router->get('delSpCart', [App\controller\Client\ClientController::class, 'delCart']);
+
+//Giỏ hàng
+$router->post('addtocart', [App\controller\Client\ClientController::class, 'addtocart']);
+
 //Client-liên hệ
 $router->get('formlienhe', [App\controller\Client\ClientController::class, 'formlienhe']);
 $router->post('addlienhe', [App\controller\Client\ClientController::class, 'addLH']);

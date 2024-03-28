@@ -9,7 +9,8 @@
         }
         function index(){
             $getAllSp = $this->modelClient->getALLSanPham();
-            return $this->render('Client.layout.header', ['getAllSp' => $getAllSp]);
+            $getAllDM = $this->modelClient->getAllDanhMuc();
+            return $this->render('Client.layout.header', ['getAllSp' => $getAllSp, 'getAllDM' => $getAllDM]);
         }
         function formdangnhap(){
             return $this->render('Client.layout.taikhoan.dangnhap');
@@ -59,7 +60,8 @@
                     </script>";
          }
          function formgiohang(){
-            return $this->render('Client.layout.giohang.giohang');
+            $getAllDM = $this->modelClient->getAllDanhMuc();
+            return $this->render('Client.layout.giohang.giohang', ['getAllDM' => $getAllDM]);
          }
          function sanphamct(){
            if(isset($_GET['id'])){
@@ -67,6 +69,19 @@
             return $this->render('Client.layout.sanpham.sanphamct', ['oneSanPham' => $oneSanPham]);
            }
          }
+         function allSanPham(){
+            $getAllSp = $this->modelClient->getALLSanPham();
+            $getAllDM = $this->modelClient->getAllDanhMuc();
+
+            return $this->render('Client.layout.sanpham.allsanpham', ['getAllSp' => $getAllSp, 'getAllDM' => $getAllDM]);
+         }
+         function sanphamDM(){
+            if(isset($_GET['id']) && $_GET['id']){
+             $dssp = $this->modelClient->loaddsp_dm($_GET['id']);
+             $getAllDM = $this->modelClient->getAllDanhMuc();
+             return $this->render('Client.layout.sanpham.sanpham', ['dssp' => $dssp, 'getAllDM' =>$getAllDM]);
+            }
+          }
          function formlienhe(){
             return $this->render('Client.layout.lienhe.index');
          }
@@ -79,5 +94,62 @@
             </script>";
             }
          }
+         function formquenMK(){
+            return $this->render('Client.layout.taikhoan.quenmk');
+         }
+         function quenMK(){
+            if(isset($_POST['quenmk'])){
+                $tendangnhap = $_POST['tendangnhap'];
+                // var_dump($tendangnhap);
+                $check = $this->modelClient->checkMK($tendangnhap);
+                // var_dump($check);
+                if(is_array($check)){
+                    $matkhau = $check['mat_khau'];
+                    echo "Mật khẩu của bạn là: ".$matkhau;
+                }else{
+                    echo "Tài khoản không tồn tại";
+                }
+                return $this->render('Client.layout.taikhoan.quenmk');
+            }
+         }
+         // Gior hangf
+         
+         function addtocart(){
+            if(isset($_POST['addtocart'])){
+                $id = $_POST['idsp'];
+                $tensp = $_POST['ten_san_pham'];
+                $gia = $_POST['gia'];
+                $gia = intval($gia);
+                $anhsp = $_POST['anh_sp'];
+                if(isset($_POST['soluong'])){
+                    $soluong = $_POST['soluong'];
+                }else{
+                    $soluong = 1;
+                }
+                $tinhtien = $soluong * $gia;
+                $spAddToCart = [$id, $tensp, $gia, $anhsp, $soluong, $tinhtien];
+                array_push($_SESSION['my_cart'], $spAddToCart);
+            }
+            $getAllDM = $this->modelClient->getAllDanhMuc();
+           return $this->render('Client.layout.giohang.giohang', ['getAllDM' => $getAllDM]);
+         }
+         function delCart(){
+            if(isset($_SESSION['my_cart']) && is_array($_SESSION['my_cart'])){
+                
+                if(isset($_GET['idsp'])){
+                    var_dump($_GET['idsp']);
+                    $idsp = intval($_GET['idsp']);
+                    array_splice($_SESSION['my_cart'],$idsp,1);
+                    // var_dump($_SESSION['my_cart']);
+                } else {
+                    $_SESSION['my_cart'] = [];
+                }
+            } else {
+                $_SESSION['my_cart'] = [];
+            }
+            header("Location: formgiohang");
+            exit();
+        }
+        
     }
 ?>

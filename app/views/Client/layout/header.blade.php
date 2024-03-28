@@ -28,15 +28,6 @@
       margin-right: 5px;
     }
 
-    /* Custom styles for footer */
-    footer {
-      background-color: #f8f9fa;
-      padding: 20px 0;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-    }
-
     .card {
       height: 100%;
       /* Thiết lập chiều cao của thẻ card */
@@ -75,14 +66,13 @@
               Sản phẩm
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="productDropdown">
-              <li><a class="dropdown-item" href="#">Áo</a></li>
-              <li><a class="dropdown-item" href="#">Quần</a></li>
-              <li><a class="dropdown-item" href="#">Dép</a></li>
-              <li><a class="dropdown-item" href="#">Mũ</a></li>
+              <?php foreach ($getAllDM as $key => $value) { ?>
+                <li><a class="dropdown-item" href="sanpham-dmsp&id={{$value['id']}}">{{$value['ten_danh_muc']}}</a></li>
+              <?php } ?>
               <li>
                 <hr class="dropdown-divider">
               </li>
-              <li><a class="dropdown-item" href="#">Xem tất cả sản phẩm</a></li>
+              <li><a class="dropdown-item" href="allsanpham">Xem tất cả sản phẩm</a></li>
             </ul>
           </li>
           <li class="nav-item">
@@ -175,32 +165,64 @@
     </div>
   </div>
   <div class="container-xxl">
-    <h1 class="mt-5 mb-4">Sản phẩm</h1>
+    <h1 class="mt-5 mb-4">Sản phẩm Mua Cho Mẹ Nghị</h1>
     <div class="product-wrapper row">
       <?php foreach ($getAllSp as $key => $value) { ?>
         <?php extract($value); ?>
         <div class="col-md-3 mb-3 product-item">
           <div class="card">
-           <a href="sanphamct&id={{$value['id']}}"> <img src="<?php echo $anh_sp ?>" width="200px" height="300px" class="card-img-top" alt="..."></a>
+            <a href="sanphamct&id={{$value['id']}}"> <img src="<?php echo $anh_sp ?>" width="200px" height="300px" class="card-img-top" alt="..."></a>
             <div class="card-body">
-              <a href="sanphamct&id={{$value['id']}}"><h5 class="card-title"><?php echo $ten_san_pham ?></h5></a>
+              <a href="sanphamct&id={{$value['id']}}">
+                <h5 class="card-title"><?php echo $ten_san_pham ?></h5>
+              </a>
               <p class="card-text"><?php echo $mo_ta ?></p>
               <p class="card-text"><?php echo  $gia . " <strong style='color: red;'> VNĐ</strong>" ?></p>
-              <a href="#" class="btn btn-primary"><i class="fas fa-cart-plus"></i> Thêm vào giỏ hàng</a>
+              <form action="addtocart" method="post">
+                <input type="hidden" name="idsp" value="<?php echo $id ?>">
+                <input type="hidden" name="ten_san_pham" value="{{$value['ten_san_pham']}}">
+                <input type="hidden" name="gia" value="{{$value['gia']}}">
+                <input type="hidden" name="anh_sp" value="{{$value['anh_sp']}}">
+                <input type="submit" class="btn btn-success" name="addtocart" value="Thêm vào giỏ hàng">
+              </form>
+              
             </div>
           </div>
         </div>
       <?php } ?>
     </div>
   </div>
-
-
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-RPPtJO3C4clI5u8sO1D4BrAKWDZO/7tNcEck6FsFwbaWuFlj7Vb5FItK9Ksgzm/r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
-</body>
+</body> <br> <br> <br> <br>
+<footer class="bg-dark text-light py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Thông tin liên hệ</h5>
+        <p>Địa chỉ: 147 Phú Đô, Quận Nam Từ Liêm Thành Phố Hà Nội</p>
+        <p>Email: quynguyenduy150@gmail.com</p>
+        <p>Facebook: <a href="https://www.facebook.com/quy.nguyenduy.7712">https://www.facebook.com/quy.nguyenduy.7712</a></p>
+        <p>Điện thoại: 0379648268</p>
+      </div>
+      <div class="col-md-6">
+        <h5>Liên kết nhanh</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Trang chủ</a></li>
+          <li><a href="#">Sản phẩm</a></li>
+          <li><a href="#">Dịch vụ</a></li>
+          <li><a href="#">Liên hệ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12 text-center">
+        <p>&copy; 2024 Thế giới quần áo. Bảo lưu mọi quyền.</p>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </html>

@@ -37,6 +37,7 @@
             </div>
             <button type="submit" class="btn btn-primary" name="dangnhap">Đăng nhập</button>
             <a href="formdangky"><button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng ký</button></a>
+            <a href="formquenmk"><button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal">Quên mật khẩu</button></a>
           </form>
         </div>
       </div>

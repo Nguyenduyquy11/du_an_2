@@ -141,6 +141,9 @@
   </nav> <br>
   <div class="container">
     <h2>Giỏ hàng</h2>
+    <li class="nav-item list-unstyled">
+      <a class="nav-link" href="mycart"> <button class="btn btn-info">Đơn hàng của bạn</button></a>
+    </li>
     <div class="row">
       <div class="col-md-8">
         <table class="table">
@@ -154,21 +157,26 @@
               <th>Thao tác</th>
             </tr>
           </thead>
+          <?php $tong = 0; ?>
+          <?php $total_items = 0; ?>
           <?php foreach ($_SESSION['my_cart'] as $key => $value) { ?>
-          <tbody>
-           
+            <?php $tong = $tong + $value['5']; ?>
+            <?php $total_items += $value['4']; ?>
+            <tbody>
+
               <tr>
                 <td>
                   <img src="<?php echo $value['3'] ?>" width="100px" height="100px" class="product-img">
                 </td>
                 <td><?php echo $value['1'] ?></td>
-                <td><?php echo $value['2']. ' <strong style="color: red;">VNĐ</strong>' ?></td>
+                <td><?php echo $value['2'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
                 <td><?php echo $value['4']  ?></td>
-                <td><?php echo $value['5']. ' <strong style="color: red;">VNĐ</strong>' ?></td>
+                <td><?php echo $value['5'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
                 <td><a href="delSpCart?idsp=<?php $value['0'] ?>"><button type="submit" class="btn btn-danger">Xóa</button></a></td>
               </tr>
-            <!-- Add more rows for other products -->
-          </tbody>
+              <!-- Add more rows for other products -->
+            </tbody>
+
           <?php } ?>
         </table>
       </div>
@@ -176,9 +184,9 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title">Tóm tắt giỏ hàng</h5>
-            <p class="card-text">Tổng số mặt hàng: 3</p>
-            <p class="card-text">Tổng giá: $130,00</p>
-            <a href="#" class="btn btn-primary">Thanh toán</a>
+            <p class="card-text">Tổng số mặt hàng: <?php echo $total_items; ?></p>
+            <p class="card-text">Tổng giá: <?php echo $tong . ' <strong style="color: red;">VNĐ</strong>' ?></p>
+            <a href="formthanhtoan" class="btn btn-primary">Thanh toán</a>
           </div>
         </div>
       </div>
@@ -190,5 +198,32 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+<footer class="bg-dark text-light py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Thông tin liên hệ</h5>
+        <p>Địa chỉ: 147 Phú Đô, Quận Nam Từ Liêm Thành Phố Hà Nội</p>
+        <p>Email: quynguyenduy150@gmail.com</p>
+        <p>Facebook: <a href="https://www.facebook.com/quy.nguyenduy.7712">https://www.facebook.com/quy.nguyenduy.7712</a></p>
+        <p>Điện thoại: 0379648268</p>
+      </div>
+      <div class="col-md-6">
+        <h5>Liên kết nhanh</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Trang chủ</a></li>
+          <li><a href="#">Sản phẩm</a></li>
+          <li><a href="#">Dịch vụ</a></li>
+          <li><a href="#">Liên hệ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12 text-center">
+        <p>&copy; 2024 Thế giới quần áo. Bảo lưu mọi quyền.</p>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </html>

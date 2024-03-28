@@ -112,7 +112,7 @@
                 return $this->render('Client.layout.taikhoan.quenmk');
             }
          }
-         // Gior hangf
+         // Giỏ hàng
          
          function addtocart(){
             if(isset($_POST['addtocart'])){
@@ -149,6 +149,32 @@
             }
             header("Location: formgiohang");
             exit();
+        }
+        //Thanh toán
+        function formthanhtoan(){
+            $getAllDM = $this->modelClient->getAllDanhMuc();
+            return $this->render('Client.layout.giohang.thanhtoan', ['getAllDM' => $getAllDM]);
+        }
+        function tonggiatridonhang(){
+            $tong = 0;
+            foreach ($_SESSION['my_cart'] as $key => $value) {
+                $tong = $tong + $value['5'];
+                return $tong;
+            }
+        }
+        function addHoaDon(){
+            if(isset($_POST['thanhtoan'])){
+                $tonggiatridonhang = $this->tonggiatridonhang();
+                date_default_timezone_set("Asia/Shanghai");
+                $ngaydathang = date("Y-m-d H:i:s");
+                $this->modelClient->addHD($_POST['hoten'],$_POST['sdt'],$_POST['diachi'],$ngaydathang,$_POST['pt_thanh_toan'],$tonggiatridonhang);
+                header("Location: index.php");
+            }
+        }
+        function mycart(){
+            $getAllHD = $this->modelClient->getAllHoaDon();
+            $getAllDM = $this->modelClient->getAllDanhMuc();
+            return $this->render('Client.layout.giohang.donhang', ['getAllDM' => $getAllDM, 'getAllHD' => $getAllHD]);
         }
         
     }

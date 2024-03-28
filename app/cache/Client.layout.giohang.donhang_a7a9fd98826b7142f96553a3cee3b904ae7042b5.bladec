@@ -140,55 +140,40 @@
  </div>
  </nav> <br>
  <div class="container">
- <h2>Giỏ hàng</h2>
- <li class="nav-item list-unstyled">
- <a class="nav-link" href="mycart"> <button class="btn btn-info">Đơn hàng của bạn</button></a>
- </li>
+ <h2>Đơn hàng của bạn</h2>
  <div class="row">
- <div class="col-md-8">
+ <div class="col-md-12">
  <table class="table">
  <thead>
  <tr>
- <th>Ảnh sản phẩm</th>
- <th>Sản phẩm</th>
- <th>Giá</th>
- <th>Số lượng</th>
+ <th>Mã đơn hàng</th>
+ <th>Ngày đặt hàng</th>
+ <th>Số điện thoại người nhận</th>
  <th>Thành tiền</th>
+ <th>Địa chỉ</th>
+ <th>Trạng thái đơn hàng</th>
  <th>Thao tác</th>
  </tr>
  </thead>
- <?php $tong = 0; ?>
- <?php $total_items = 0; ?>
- <?php foreach ($_SESSION['my_cart'] as $key => $value) { ?>
- <?php $tong = $tong + $value['5']; ?>
- <?php $total_items += $value['4']; ?>
  <tbody>
-
+ <?php foreach ($getAllHD as $key => $value) { ?>
  <tr>
+ <td>SPMWME-<?php echo $value['id'] ?></td>
+ <td><?php echo $value['ngay_dat_hang'] ?></td>
+ <td><?php echo $value['sdt_nguoi_nhan'] ?></td>
+ <td><?php echo $value['tong_tien']. ' <strong style="color: red;">VNĐ</strong>' ?></td>
+ <td><?php echo $value['dia_chi'] ?></td>
+ <td><?php echo $value['trang_thai'] ?></td>
  <td>
- <img src="<?php echo $value['3'] ?>" width="100px" height="100px" class="product-img">
+ <button class="btn btn-outline-success">Xem chi tiết</button>
+ <button class="btn btn-outline-success">Hủy</button>
  </td>
- <td><?php echo $value['1'] ?></td>
- <td><?php echo $value['2'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
- <td><?php echo $value['4']  ?></td>
- <td><?php echo $value['5'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
- <td><a href="delSpCart?idsp=<?php $value['0'] ?>"><button type="submit" class="btn btn-danger">Xóa</button></a></td>
  </tr>
+ <?php  } ?>
+ 
  <!-- Add more rows for other products -->
  </tbody>
-
- <?php } ?>
  </table>
- </div>
- <div class="col-md-4">
- <div class="card">
- <div class="card-body">
- <h5 class="card-title">Tóm tắt giỏ hàng</h5>
- <p class="card-text">Tổng số mặt hàng: <?php echo $total_items; ?></p>
- <p class="card-text">Tổng giá: <?php echo $tong . ' <strong style="color: red;">VNĐ</strong>' ?></p>
- <a href="formthanhtoan" class="btn btn-primary">Thanh toán</a>
- </div>
- </div>
  </div>
  </div>
  </div>

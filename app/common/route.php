@@ -66,6 +66,11 @@ $router->get('delSpCart', [App\controller\Client\ClientController::class, 'delCa
 
 //Giỏ hàng
 $router->post('addtocart', [App\controller\Client\ClientController::class, 'addtocart']);
+$router->get('formthanhtoan', [App\controller\Client\ClientController::class, 'formthanhtoan']);
+$router->post('thanhtoan', [App\controller\Client\ClientController::class, 'addHoaDon']);
+$router->get('mycart', [App\controller\Client\ClientController::class, 'mycart']);
+
+
 
 //Client-liên hệ
 $router->get('formlienhe', [App\controller\Client\ClientController::class, 'formlienhe']);

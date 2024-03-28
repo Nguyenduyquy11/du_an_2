@@ -35,6 +35,7 @@
  position: absolute;
  bottom: 0;
  width: 100%;
+ margin-bottom: -150px;
  }
 
  .card {
@@ -58,6 +59,11 @@
  /* Custom styles for shopping cart */
  .product-img {
  max-width: 100px;
+ }
+
+ body {
+ margin-bottom: 50px;
+ /* Khoảng cách giữa body và footer */
  }
  </style>
 </head>
@@ -140,57 +146,69 @@
  </div>
  </nav> <br>
  <div class="container">
- <h2>Giỏ hàng</h2>
- <li class="nav-item list-unstyled">
- <a class="nav-link" href="mycart"> <button class="btn btn-info">Đơn hàng của bạn</button></a>
- </li>
+ <h2 class="mt-4 mb-4">Chi tiết thanh toán</h2>
+ <form action="thanhtoan" method="post">
  <div class="row">
- <div class="col-md-8">
- <table class="table">
- <thead>
- <tr>
- <th>Ảnh sản phẩm</th>
- <th>Sản phẩm</th>
- <th>Giá</th>
- <th>Số lượng</th>
- <th>Thành tiền</th>
- <th>Thao tác</th>
- </tr>
- </thead>
- <?php $tong = 0; ?>
- <?php $total_items = 0; ?>
- <?php foreach ($_SESSION['my_cart'] as $key => $value) { ?>
- <?php $tong = $tong + $value['5']; ?>
- <?php $total_items += $value['4']; ?>
- <tbody>
 
- <tr>
- <td>
- <img src="<?php echo $value['3'] ?>" width="100px" height="100px" class="product-img">
- </td>
- <td><?php echo $value['1'] ?></td>
- <td><?php echo $value['2'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
- <td><?php echo $value['4']  ?></td>
- <td><?php echo $value['5'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
- <td><a href="delSpCart?idsp=<?php $value['0'] ?>"><button type="submit" class="btn btn-danger">Xóa</button></a></td>
- </tr>
- <!-- Add more rows for other products -->
- </tbody>
 
- <?php } ?>
- </table>
+
+ <div class="col-md-3">
+ <div class="form-group">
+ <label for="ho_ten">Họ và tên</label>
+ <input type="text" class="form-control" name="hoten" placeholder="Nhập họ và tên">
  </div>
- <div class="col-md-4">
- <div class="card">
- <div class="card-body">
- <h5 class="card-title">Tóm tắt giỏ hàng</h5>
- <p class="card-text">Tổng số mặt hàng: <?php echo $total_items; ?></p>
- <p class="card-text">Tổng giá: <?php echo $tong . ' <strong style="color: red;">VNĐ</strong>' ?></p>
- <a href="formthanhtoan" class="btn btn-primary">Thanh toán</a>
+ <div class="form-group">
+ <label for="so_dien_thoai">Số điện thoại</label>
+ <input type="text" class="form-control" name="sdt" placeholder="Nhập số điện thoại">
+ </div>
+ <div class="form-group">
+ <label for="dia_chi">Địa chỉ</label>
+ <input type="text" class="form-control" name="diachi" placeholder="Nhập địa chỉ">
  </div>
  </div>
+ <div class="col-md-9">
+ <!-- Danh sách sản phẩm trong giỏ hàng -->
+ <h4 class="mb-3">Danh sách sản phẩm trong giỏ hàng</h4>
+ <!-- Đoạn code PHP để hiển thị danh sách sản phẩm trong giỏ hàng -->
+
+ <ul class="list-group mb-3">
+ <li class="list-group-item d-flex justify-content-between lh-condensed">
+ <h4>Ảnh sản phẩm</h4>
+ <div>
+ <h4 class="my-0">Tên sản phẩm</h4>
+
+ </div>
+ <h4 class="my-0">Giá</h4>
+ <h4 class="my-0">Số lượng</h4>
+ </li>
+ <?php
+ $tong = 0;
+ foreach ($_SESSION['my_cart'] as $key => $value) {
+ $tong = $tong + $value['5']
+ ?>
+ <li class="list-group-item d-flex justify-content-between">
+ <span><img src="<?php echo $value['3'] ?>" width="100px" height="100px" alt=""></span>
+ <span><?php echo $value['1'] ?></span>
+ <span> <?php echo $value['2'] . ' <strong style="color:red;">VNĐ</strong>' ?></span>
+ <span><?php echo $value['4'] ?></span>
+
+ </li>
+ </ul>
+ <?php } ?> <br>
+ <h4 class="mb-3">Phương thức thanh toán</h4>
+ <div class="d-block my-3">
+ <div class="custom-control custom-radio">
+ <input id="thanh_toan_khi_nhan_hang" name="pt_thanh_toan" type="radio" class="custom-control-input" value="thanh_toan_khi_nhan_hang">
+ <label class="custom-control-label" for="thanh_toan_khi_nhan_hang">Thanh toán khi nhận hàng</label>
  </div>
  </div>
+ <!-- Tổng tiền -->
+ <h5 class="mb-3">Tổng tiền: <strong><?php echo $tong . ' <strong style="color:red;">VNĐ</strong>' ?></strong></h5>
+ <!-- Nút thanh toán -->
+ <button class="btn btn-primary btn-lg btn-block" name="thanhtoan" type="submit">Thanh toán</button>
+ </div>
+ </div>
+ </form>
  </div>
 
  <!-- Bootstrap JS -->
@@ -198,6 +216,7 @@
  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 <footer class="bg-dark text-light py-4">
  <div class="container">
  <div class="row">

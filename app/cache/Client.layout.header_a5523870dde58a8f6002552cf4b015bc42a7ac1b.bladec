@@ -165,7 +165,7 @@
  </div>
  </div>
  <div class="container-xxl">
- <h1 class="mt-5 mb-4">Sản phẩm Mua Cho Mẹ Nghị</h1>
+ <h1 class="mt-5 mb-4">Sản phẩm</h1>
  <div class="product-wrapper row">
  <?php foreach ($getAllSp as $key => $value) { ?>
  <?php extract($value); ?>

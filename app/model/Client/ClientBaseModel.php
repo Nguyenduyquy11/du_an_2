@@ -38,6 +38,19 @@ use PDO;
                 return null;
             }
         }
+        public function insertAndGetLastInsertId($sql) {
+            try {
+                $pdo = $this->getConnect(); // Lấy kết nối PDO từ phương thức getConnect
+                $stmt = $pdo->prepare($sql);
+                $stmt->execute();
+                // Trả về ID của bản ghi vừa chèn
+                return $pdo->lastInsertId();
+            } catch(PDOException $e) {
+                echo "Lỗi truy vấn: " . $e->getMessage();
+                return null;
+            }
+        }
+        
     }
         
     

@@ -69,6 +69,8 @@ $router->post('addtocart', [App\controller\Client\ClientController::class, 'addt
 $router->get('formthanhtoan', [App\controller\Client\ClientController::class, 'formthanhtoan']);
 $router->post('thanhtoan', [App\controller\Client\ClientController::class, 'addHoaDon']);
 $router->get('mycart', [App\controller\Client\ClientController::class, 'mycart']);
+$router->get('xemcthoadon', [App\controller\Client\ClientController::class, 'ctDonHang']);
+
 
 
 

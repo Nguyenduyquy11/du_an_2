@@ -59,6 +59,10 @@
     .product-img {
       max-width: 100px;
     }
+
+    .btn-group {
+      white-space: nowrap;
+    }
   </style>
 </head>
 
@@ -143,37 +147,43 @@
     <h2>Đơn hàng của bạn</h2>
     <div class="row">
       <div class="col-md-12">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Mã đơn hàng</th>
-              <th>Ngày đặt hàng</th>
-              <th>Số điện thoại người nhận</th>
-              <th>Thành tiền</th>
-              <th>Địa chỉ</th>
-              <th>Trạng thái đơn hàng</th>
-              <th>Thao tác</th>
-            </tr>
-          </thead>
+        <div class="table-responsive">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Mã đơn hàng</th>
+                <th>Ngày đặt hàng</th>
+                <th>Số điện thoại người nhận</th>
+                <th>Thành tiền</th>
+                <th>Địa chỉ</th>
+                <th>Trạng thái đơn hàng</th>
+                <th>Thao tác</th>
+              </tr>
+            </thead>
             <tbody>
-                <?php foreach ($getAllHD as $key => $value) { ?>
-                        <tr>
-                        <td>SPMWME-<?php echo $value['id'] ?></td>
-                        <td><?php echo $value['ngay_dat_hang'] ?></td>
-                        <td><?php echo $value['sdt_nguoi_nhan'] ?></td>
-                        <td><?php echo $value['tong_tien']. ' <strong style="color: red;">VNĐ</strong>' ?></td>
-                          <td><?php echo $value['dia_chi'] ?></td>
-                        <td><?php echo $value['trang_thai'] ?></td>
-                        <td>
-                            <button class="btn btn-outline-success">Xem chi tiết</button>
-                            <button class="btn btn-outline-success">Hủy</button>
-                        </td>
-                      </tr>
-               <?php  } ?>
-              
+              <?php foreach ($getAllHD as $key => $value) { ?>
+                <tr>
+                  <td>SPMWME-<?php echo $value['id'] ?></td>
+                  <td><?php echo $value['ngay_dat_hang'] ?></td>
+                  <td><?php echo $value['sdt_nguoi_nhan'] ?></td>
+                  <td><?php echo $value['tong_tien'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
+                  <td><?php echo $value['dia_chi'] ?></td>
+                  <td><?php echo $value['trang_thai'] ?></td>
+                  <td>
+                    <div class="btn-group">
+                     <a href="xemcthoadon&id={{$value['id']}}"> <button type="button" class="btn btn-outline-success">Xem chi tiết</button></a>
+                      <button class="btn btn-outline-success" type="button">Hủy</button>
+                    </div>
+                  </td>
+
+
+                </tr>
+              <?php  } ?>
+
               <!-- Add more rows for other products -->
             </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   </div>

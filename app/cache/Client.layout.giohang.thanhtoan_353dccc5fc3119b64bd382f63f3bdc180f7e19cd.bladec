@@ -146,7 +146,7 @@
  </div>
  </nav> <br>
  <div class="container">
- <h2 class="mt-4 mb-4">Chi tiết thanh toán</h2>
+ <h2 class="mt-4 mb-4">Thanh toán</h2>
  <form action="thanhtoan" method="post">
  <div class="row">
 

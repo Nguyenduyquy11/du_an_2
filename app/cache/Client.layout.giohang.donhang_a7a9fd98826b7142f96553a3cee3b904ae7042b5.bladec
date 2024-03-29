@@ -59,6 +59,10 @@
  .product-img {
  max-width: 100px;
  }
+
+ .btn-group {
+ white-space: nowrap;
+ }
  </style>
 </head>
 
@@ -143,6 +147,7 @@
  <h2>Đơn hàng của bạn</h2>
  <div class="row">
  <div class="col-md-12">
+ <div class="table-responsive">
  <table class="table">
  <thead>
  <tr>
@@ -161,19 +166,24 @@
  <td>SPMWME-<?php echo $value['id'] ?></td>
  <td><?php echo $value['ngay_dat_hang'] ?></td>
  <td><?php echo $value['sdt_nguoi_nhan'] ?></td>
- <td><?php echo $value['tong_tien']. ' <strong style="color: red;">VNĐ</strong>' ?></td>
+ <td><?php echo $value['tong_tien'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
  <td><?php echo $value['dia_chi'] ?></td>
  <td><?php echo $value['trang_thai'] ?></td>
  <td>
- <button class="btn btn-outline-success">Xem chi tiết</button>
- <button class="btn btn-outline-success">Hủy</button>
+ <div class="btn-group">
+ <a href="xemcthoadon&id=<?php echo \htmlentities($value['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"> <button type="button" class="btn btn-outline-success">Xem chi tiết</button></a>
+ <button class="btn btn-outline-success" type="button">Hủy</button>
+ </div>
  </td>
+
+
  </tr>
  <?php  } ?>
- 
+
  <!-- Add more rows for other products -->
  </tbody>
  </table>
+ </div>
  </div>
  </div>
  </div>

@@ -53,6 +53,29 @@
             margin-bottom: 2rem;
             /* Khoảng cách giữa các ô sản phẩm */
         }
+
+        /* Custom CSS */
+        .comment-box {
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .comment-meta {
+            margin-top: 5px;
+            font-size: 0.8em;
+            color: #6c757d;
+        }
     </style>
 </head>
 
@@ -148,11 +171,11 @@
                     <h3><?php echo $value['ten_san_pham'] ?></h3>
                     <p><?php echo $value['mo_ta'] ?>.</p>
                     <p class="price"><?php echo $value['gia'] ?></p>
-                    
+
                     <form action="addtocart" method="post">
                         <input type="hidden" name="idsp" value="<?php echo $id ?>">
                         <input type="hidden" name="ten_san_pham" value="{{$value['ten_san_pham']}}">
-                        <input type="hidden" name="gia" value="{{$value['gia']}}"> 
+                        <input type="hidden" name="gia" value="{{$value['gia']}}">
                         <input type="number" class="form-control" name="soluong" value="1"><br>
                         <input type="hidden" name="anh_sp" value="{{$value['anh_sp']}}">
                         <input type="submit" class="btn btn-success" name="addtocart" value="Thêm vào giỏ hàng">
@@ -167,7 +190,8 @@
             </div>
         </div>
     <?php } ?>
-
+    @include('Client.layout.binhluan.index')
+        
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-RPPtJO3C4clI5u8sO1D4BrAKWDZO/7tNcEck6FsFwbaWuFlj7Vb5FItK9Ksgzm/r" crossorigin="anonymous"></script>

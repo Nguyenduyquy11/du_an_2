@@ -38,13 +38,19 @@ $router->get('deleteSP', [App\controller\Admin\AdminController::class, 'deleteSP
 $router->get('lienhe', [App\controller\Admin\AdminController::class, 'alllienhe']);
 $router->get('formupdateLH', [App\controller\Admin\AdminController::class, 'formupdateLH']);
 
-//Chức vụ
+//Admin-Chức vụ
 $router->get('chucvu', [App\controller\Admin\AdminController::class, 'getAllCV']);
 $router->get('formaddCV', [App\controller\Admin\AdminController::class, 'formaddCV']);
 $router->post('addCV', [App\controller\Admin\AdminController::class, 'addCV']);
 $router->get('formupdateCV', [App\controller\Admin\AdminController::class, 'formupdateCV']);
 $router->post('updateCV', [App\controller\Admin\AdminController::class, 'updateCV']);
 $router->get('deleteCV', [App\controller\Admin\AdminController::class, 'deleteCV']);
+//Admin-Hóa đơn
+$router->get('hoadon', [App\controller\Admin\AdminController::class, 'formhoadon']);
+$router->get('formcapnhattt', [App\controller\Admin\AdminController::class, 'formcapnhattt']);
+$router->post('updateTt', [App\controller\Admin\AdminController::class, 'capnhatTt']);
+
+
 // Client
 $router->get('/', [App\controller\Client\ClientController::class, 'index']);
 $router->get('index', [App\controller\Client\ClientController::class, 'index']);
@@ -52,6 +58,7 @@ $router->get('formdangnhap', [App\controller\Client\ClientController::class, 'fo
 $router->get('formdangky', [App\controller\Client\ClientController::class, 'formdangky']);
 $router->get('formquenmk', [App\controller\Client\ClientController::class, 'formquenMK']);
 $router->post('quenmk', [App\controller\Client\ClientController::class, 'quenMK']);
+$router->post('addAvt', [App\controller\Client\ClientController::class, 'setAvt']);
 //San Pham
 $router->post('dangky', [App\controller\Client\ClientController::class, 'dangkyTK']);
 $router->post('dangnhap', [App\controller\Client\ClientController::class, 'dangnhapTK']);
@@ -70,7 +77,8 @@ $router->get('formthanhtoan', [App\controller\Client\ClientController::class, 'f
 $router->post('thanhtoan', [App\controller\Client\ClientController::class, 'addHoaDon']);
 $router->get('mycart', [App\controller\Client\ClientController::class, 'mycart']);
 $router->get('xemcthoadon', [App\controller\Client\ClientController::class, 'ctDonHang']);
-
+//Binh luan
+$router->post('binhluan', [App\controller\Client\ClientController::class, 'addbinhluan']);
 
 
 

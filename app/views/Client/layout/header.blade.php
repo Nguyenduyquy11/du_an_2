@@ -107,7 +107,7 @@
               <a class="nav-link" href="dangxuat"><button class="btn btn-info">Thoát</button></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="myaccount"><button class="btn btn-info">Tài khoản</button></a>
+              <a class="nav-link" href="myaccount&id={{$_SESSION['taikhoan']['id']}}"><button class="btn btn-info">Tài khoản</button></a>
             </li>
 
 

@@ -165,5 +165,23 @@
         function formupdateLH(){
             return $this->render('Admin.layout.lienhe.update');
         }
+        function formhoadon(){
+            $ttdh = $this->model->getTtdh();
+            $getAllHD = $this->model->getAllHoaDon();
+            return $this->render('Admin.layout.hoadon.list', ['getAllHD' => $getAllHD, 'ttdh' => $ttdh]);
+        }
+        function formcapnhattt(){
+            if(isset($_GET['id'])){
+                $idhd = $_GET['id'];
+                $oneHoaDon = $this->model->get_one_hoa_don($idhd);
+                return $this->render('Admin.layout.hoadon.update', ['oneHoaDon' => $oneHoaDon]);
+            }
+        }
+        function capnhatTt(){
+            if(isset($_POST['updateTt'])){
+                $this->model->update_tt($_POST['id'],$_POST['status']);
+                header("Location: hoadon");
+            }
+        }
     }
 ?>

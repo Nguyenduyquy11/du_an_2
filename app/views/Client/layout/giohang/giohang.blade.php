@@ -142,7 +142,7 @@
   <div class="container">
     <h2>Giỏ hàng</h2>
     <li class="nav-item list-unstyled">
-      <a class="nav-link" href="mycart"> <button class="btn btn-info">Đơn hàng của bạn</button></a>
+      <a class="nav-link" href="mycart&id={{$_SESSION['taikhoan']['id']}}"> <button class="btn btn-info">Đơn hàng của bạn</button></a>
     </li>
     <div class="row">
       <div class="col-md-8">

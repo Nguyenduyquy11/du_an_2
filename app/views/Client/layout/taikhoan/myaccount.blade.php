@@ -4,8 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>User Information Form</title>
+  <title>Thông tin tài khoản</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
   <style>
     .btn-search {
       min-width: 100px;
@@ -24,15 +27,6 @@
     /* Thêm biểu tượng icon */
     .login-icon {
       margin-right: 5px;
-    }
-
-    /* Custom styles for footer */
-    footer {
-      background-color: #f8f9fa;
-      padding: 20px 0;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
     }
 
     .card {
@@ -58,7 +52,7 @@
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container">
-      <a class="navbar-brand" href="index"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrLnCBOxLUndyDnLhApSKbVX17IYayufW9mw6EewH6Y_Bco3w0Z0sbLK1Dmar7tNipLJ0&usqp=CAU" alt="Logo" height="40"></a>
+      <a class="navbar-brand" href="index"><img src="./app/img/—Pngtree—am or ma abstract_6950476.png" alt="Logo" height="60" width="60"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -72,9 +66,9 @@
               Sản phẩm
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown" id="productDropdown">
-              <li><a class="dropdown-item" href="#">Sản phẩm 1</a></li>
-              <li><a class="dropdown-item" href="#">Sản phẩm 2</a></li>
-              <li><a class="dropdown-item" href="#">Sản phẩm 3</a></li>
+              <?php foreach ($getAllDM as $key => $value) { ?>
+                <li><a class="dropdown-item" href="sanpham-dmsp&id={{$value['id']}}">{{$value['ten_danh_muc']}}</a></li>
+              <?php } ?>
               <li>
                 <hr class="dropdown-divider">
               </li>
@@ -136,9 +130,14 @@
 
     <?php
     if (isset($_SESSION['taikhoan'])) {
-      extract($_SESSION['taikhoan']);
+      $img = $_SESSION['taikhoan']['img'];
     }
     ?>
+    <img src="<?php echo $img  ?>" width="300px" height="300px" class="user-avatar" >
+    <form action="addAvt" method="post" enctype="multipart/form-data">
+      <br><input type="file" name="avt"> <br>
+      <br><input type="submit" name="addAvt" class="btn btn-outline-success" value="Tải ảnh lên">
+    </form>
     <br> <br>
     <h3><strong>Xin chào</strong></h3>
     <h5><?= $ten_dang_nhap ?></h5>
@@ -164,15 +163,37 @@
       <button type="submit" name="editTK" class="btn btn-primary">Sửa thông tin</button>
     </form>
   </div>
-  <footer class="text-center">
-    <div class="container">
-      <p>&copy; 2024 Your Website</p>
-    </div>
-  </footer>
   <!-- Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+</body> <br> <br> <br>
+<footer class="bg-dark text-light py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h5>Thông tin liên hệ</h5>
+        <p>Địa chỉ: 147 Phú Đô, Quận Nam Từ Liêm Thành Phố Hà Nội</p>
+        <p>Email: quynguyenduy150@gmail.com</p>
+        <p>Facebook: <a href="https://www.facebook.com/quy.nguyenduy.7712">https://www.facebook.com/quy.nguyenduy.7712</a></p>
+        <p>Điện thoại: 0379648268</p>
+      </div>
+      <div class="col-md-6">
+        <h5>Liên kết nhanh</h5>
+        <ul class="list-unstyled">
+          <li><a href="#">Trang chủ</a></li>
+          <li><a href="#">Sản phẩm</a></li>
+          <li><a href="#">Dịch vụ</a></li>
+          <li><a href="#">Liên hệ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-md-12 text-center">
+        <p>&copy; 2024 Thế giới quần áo. Bảo lưu mọi quyền.</p>
+      </div>
+    </div>
+  </div>
+</footer>
 
 </html>

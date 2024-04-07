@@ -27,12 +27,12 @@ class ClientController extends ClientBaseController
             $checkuser = $this->modelClient->dangnhap($_POST['tendangnhap'], $_POST['matkhau']);
             if (is_array($checkuser)) {
                 $_SESSION['taikhoan'] = $checkuser;
-                echo "<script>
-                            alert('Đăng nhập thành công!');
-                            window.location.href = 'index.php';
-                        </script>";
+                header("Location: index.php");
             } else {
-                echo $thongbao = "Tài khoản không tồn tại";
+                echo "<script>
+                        alert('Tài khoản không tồn tại');
+                        window.location = '{$_SERVER['HTTP_REFERER']}' 
+                     </script>";
             }
         }
     }
@@ -57,7 +57,8 @@ class ClientController extends ClientBaseController
     }
     function formaccount()
     {
-        return $this->render('Client.layout.taikhoan.myaccount');
+        $getAllDM = $this->modelClient->getAllDanhMuc();
+        return $this->render('Client.layout.taikhoan.myaccount', ['getAllDM' => $getAllDM]);
     }
     function editTK()
     {
@@ -73,14 +74,21 @@ class ClientController extends ClientBaseController
     }
     function formgiohang()
     {
+
         $getAllDM = $this->modelClient->getAllDanhMuc();
         return $this->render('Client.layout.giohang.giohang', ['getAllDM' => $getAllDM]);
     }
     function sanphamct()
     {
+        $idtk = '';
         if (isset($_GET['id'])) {
+            if(isset($_SESSION['taikhoan'])){
+                $idtk = $_SESSION['taikhoan']['id'];
+            }
+            $getAllSp = $this->modelClient->getALLSanPham();
+            $getAllBL = $this->modelClient->getAllBinhLuan($_GET['id'], $idtk);
             $oneSanPham = $this->modelClient->getOneSanPham($_GET['id']);
-            return $this->render('Client.layout.sanpham.sanphamct', ['oneSanPham' => $oneSanPham]);
+            return $this->render('Client.layout.sanpham.sanphamct', ['oneSanPham' => $oneSanPham, 'getAllBL' => $getAllBL, 'getAllSp' => $getAllSp]);
         }
     }
     function allSanPham()
@@ -130,6 +138,22 @@ class ClientController extends ClientBaseController
                 echo "Tài khoản không tồn tại";
             }
             return $this->render('Client.layout.taikhoan.quenmk');
+        }
+    }
+    function setAvt(){
+        if(isset($_POST['addAvt'])){
+            if(isset($_SESSION['taikhoan'])){
+                $idtk = $_SESSION['taikhoan']['id'];
+            }
+           if(isset($_FILES['avt'])){
+                $target_dir = 'app/img/';
+                $image = $_FILES['avt']['name'];
+                $target_file = $target_dir . $image;
+                move_uploaded_file($_FILES['avt']['tmp_name'], $target_file);
+           }
+           $this->modelClient->addAvatar($idtk, $target_file);
+           header('Location: myaccount');
+           echo "Thêm thành công";
         }
     }
     // Giỏ hàng
@@ -188,33 +212,70 @@ class ClientController extends ClientBaseController
     }
     function addHoaDon()
     {
-        if (isset($_POST['thanhtoan'])) {
-            $tonggiatridonhang = $this->tonggiatridonhang();
-            date_default_timezone_set("Asia/Shanghai");
-            $ngaydathang = date("Y-m-d H:i:s");
-            $idHoaHon =  $this->modelClient->addHD($_POST['hoten'], $_POST['sdt'], $_POST['diachi'], $ngaydathang, $_POST['pt_thanh_toan'], $tonggiatridonhang);
-            // var_dump($idHoaHon);
-            foreach ($_SESSION['my_cart'] as $key => $value) {
-                // $spAddToCart = [$id, $tensp, $gia, $anhsp, $soluong, $tinhtien];
-                $this->modelClient->addHDCT($idHoaHon,$value['0'], $value['1'],$value['3'], $value['2'] , $value['4'], $value['5']);
+        if (isset($_SESSION['taikhoan'])) {
+            if (isset($_POST['thanhtoan'])) {
+                if (isset($_SESSION['taikhoan'])) {
+                    $iduser = $_SESSION['taikhoan']['id'];
+                } else {
+                    $iduser = 0;
+                }
+                $tonggiatridonhang = $this->tonggiatridonhang();
+                date_default_timezone_set("Asia/Shanghai");
+                $ngaydathang = date("Y-m-d H:i:s");
+                $idHoaHon =  $this->modelClient->addHD($iduser, $_POST['hoten'], $_POST['sdt'], $_POST['diachi'], $ngaydathang, $_POST['pt_thanh_toan'], $tonggiatridonhang);
+                // var_dump($idHoaHon);
+                foreach ($_SESSION['my_cart'] as $key => $value) {
+                    // $spAddToCart = [$id, $tensp, $gia, $anhsp, $soluong, $tinhtien];
+                    $this->modelClient->addHDCT($idHoaHon, $value['0'], $value['1'], $value['3'], $value['2'], $value['4'], $value['5']);
+                }
+                unset($_SESSION['my_cart']);
+                header("Location: index.php");
             }
-            unset($_SESSION['my_cart']);
-            header("Location: index.php");
+        } else {
+            echo "<script> alert('Bạn cần đăng nhập để mua hàng');
+                           window.location = '{$_SERVER['HTTP_REFERER']}'
+                </script>";
         }
     }
     function mycart()
     {
-        $getAllHD = $this->modelClient->getAllHoaDon();
-        $getAllDM = $this->modelClient->getAllDanhMuc();
-        return $this->render('Client.layout.giohang.donhang', ['getAllDM' => $getAllDM, 'getAllHD' => $getAllHD]);
+        if(isset($_GET['id'])){
+            // $list = $this->modelClient->loadAllHoaDon($_SESSION['taikhoan']['id']);
+            $getAllHD = $this->modelClient->getAllHoaDon($_GET['id']);
+            $getAllDM = $this->modelClient->getAllDanhMuc();
+            $listTtdh = $this->modelClient->getTtdh();
+            return $this->render('Client.layout.giohang.donhang', ['getAllDM' => $getAllDM, 'getAllHD' => $getAllHD, 'listTtdh' => $listTtdh]);
+        }
     }
     function ctDonHang()
     {
-        if(isset($_GET['id'])) {
+        if (isset($_GET['id'])) {
             $getOneHoaDonCt = $this->modelClient->getOneHoaDonCt($_GET['id']);
             $getOneHoaDon = $this->modelClient->getOneHoaDon($_GET['id']);
             $getAllDM = $this->modelClient->getAllDanhMuc();
             return $this->render('Client.layout.giohang.donhangct', ['getAllDM' => $getAllDM, 'getOneHoaDon' => $getOneHoaDon, 'getOneHoaDonCt' => $getOneHoaDonCt]);
+        }
+    }
+    function addbinhluan()
+    {
+        if (isset($_POST['binhluan'])) {
+            if (isset($_SESSION['taikhoan'])) {
+                $tendn = $_SESSION['taikhoan']['ho_ten_nguoi_dung'];
+                $iduser = $_SESSION['taikhoan']['id'];
+                $avtuser = $_SESSION['taikhoan']['img'];
+            }
+            else {
+                echo "<script> alert('Bạn cần đăng nhập để bình luận');
+                               window.location = '{$_SERVER['HTTP_REFERER']}'
+                     </script>";
+            }
+            date_default_timezone_set("Asia/Shanghai");
+            $ngaybinhluan = date("Y-m-d H:i:s");
+            $this->modelClient->addBL($tendn, $_POST['noidung'], $ngaybinhluan,$_POST['idsp'],$iduser,$avtuser);
+            if (isset($_SERVER['HTTP_REFERER'])) {
+                header("Location: " . $_SERVER['HTTP_REFERER']);
+            }
+            exit;
         }
     }
 }

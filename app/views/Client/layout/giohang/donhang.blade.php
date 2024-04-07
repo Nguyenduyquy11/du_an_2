@@ -168,7 +168,7 @@
                   <td><?php echo $value['sdt_nguoi_nhan'] ?></td>
                   <td><?php echo $value['tong_tien'] . ' <strong style="color: red;">VNĐ</strong>' ?></td>
                   <td><?php echo $value['dia_chi'] ?></td>
-                  <td><?php echo $value['trang_thai'] ?></td>
+                  <td><?php echo isset($listTtdh[$value['trang_thai']]) ? $listTtdh[$value['trang_thai']] : ''  ?></td>
                   <td>
                     <div class="btn-group">
                      <a href="xemcthoadon&id={{$value['id']}}"> <button type="button" class="btn btn-outline-success">Xem chi tiết</button></a>

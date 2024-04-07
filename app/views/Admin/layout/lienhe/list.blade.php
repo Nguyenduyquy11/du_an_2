@@ -120,10 +120,12 @@
 
 <div id="sidebar">
   <ul>
-    <li><a href="admin">Dashboard</a></li>
+  <li><a href="admin">Dashboard</a></li>
     <li><a href="danhmuc"> Manager Category</a></li>
     <li><a href="sanpham">Manager Products</a></li>
     <li><a href="chucvu">Manager Role</a></li>
+    <li><a href="lienhe">Manager Contact</a></li>
+    <li><a href="hoadon">Manager Bill</a></li>
     <li><a href="index.php">Back Home</a></li>
   </ul>
 </div>

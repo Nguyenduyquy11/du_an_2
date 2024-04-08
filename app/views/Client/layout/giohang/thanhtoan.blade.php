@@ -155,15 +155,15 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="ho_ten">Họ và tên</label>
-                        <input type="text" class="form-control" name="hoten" placeholder="Nhập họ và tên">
+                        <input type="text" class="form-control" name="hoten" placeholder="Nhập họ và tên" required>
                     </div>
                     <div class="form-group">
                         <label for="so_dien_thoai">Số điện thoại</label>
-                        <input type="text" class="form-control" name="sdt" placeholder="Nhập số điện thoại">
+                        <input type="text" class="form-control" name="sdt" placeholder="Nhập số điện thoại" required>
                     </div>
                     <div class="form-group">
                         <label for="dia_chi">Địa chỉ</label>
-                        <input type="text" class="form-control" name="diachi" placeholder="Nhập địa chỉ">
+                        <input type="text" class="form-control" name="diachi" placeholder="Nhập địa chỉ" required>
                     </div>
                 </div>
                 <div class="col-md-9">

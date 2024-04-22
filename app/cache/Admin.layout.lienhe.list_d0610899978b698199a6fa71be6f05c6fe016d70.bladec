@@ -124,6 +124,8 @@
  <li><a href="danhmuc"> Manager Category</a></li>
  <li><a href="sanpham">Manager Products</a></li>
  <li><a href="chucvu">Manager Role</a></li>
+ <li><a href="lienhe">Manager Contact</a></li>
+ <li><a href="hoadon">Manager Bill</a></li>
  <li><a href="index.php">Back Home</a></li>
  </ul>
 </div>
@@ -140,16 +142,27 @@
  <th>Họ và tên người gửi liên hệ</th>
  <th>Email</th>
  <th>Nội dung liên hệ</th>
+ <th>Trạng thái liên hệ</th>
  <th>Thao tác</th>
  </tr>
  </thead>
  <tbody>
  <?php foreach ($allLH as $key => $value) { ?>
+ <?php 
+ $trangthai = '';
+ extract($value);
+ if($value['trang_thai'] == 11){
+ $trangthai = "Đã liên hệ với khách hàng";
+ }elseif($value['trang_thai'] == 0){
+ $trangthai = "Chưa liên hệ với khách hàng";
+ }
+ ?>
  <tr>
  <td><?php echo $value['id'] ?></td>
  <td><?php echo $value['ten'] ?></td>
  <td><?php echo $value['email'] ?></td>
  <td><?php echo $value['noi_dung'] ?></td>
+ <td><?php echo $trangthai ?></td>
  <td>
  <a href="formupdateLH&id=<?php echo \htmlentities($value['id']??'', ENT_QUOTES, 'UTF-8', false); ?>"><input type="submit" name="suatk" value="Edit" class="styled-button"></a>
  </td>
@@ -157,7 +170,6 @@
  <?php } ?>
  </tbody>
  </table>
- <br> <br><a href="formadddm"><input type="submit" value="Thêm mới" class="styled-button"></a>
 </div>
 
 

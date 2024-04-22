@@ -69,13 +69,12 @@
 <br><br><div class="container">
     <form action="updateLH" method="post">
     <div class="mb-3 mt-5">
-        <label  class="form-label"> Liên Hệ </label>
+        <label  class="form-label"> Liên hệ </label>
         <select name="lienhe" class="form-control" id="">
-            <option value="">Chưa liên hệ với khách hàng</option>
             <option value="">Đã liên hệ với khách hàng</option>
         </select> <br>
        
-        <input type="hidden" name="id" value="{{$oneDM['id']}}">
+        <input type="hidden" name="id" value="{{$getOneLienHe['id']}}">
         <button type="submit" class="btn btn-success" name="updateLH">Cập nhật </button>
     </div>
             

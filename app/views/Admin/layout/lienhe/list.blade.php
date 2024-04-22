@@ -142,16 +142,27 @@
         <th>Họ và tên người gửi liên hệ</th>
         <th>Email</th>
         <th>Nội dung liên hệ</th>
+        <th>Trạng thái liên hệ</th>
         <th>Thao tác</th>
       </tr>
     </thead>
     <tbody>
       <?php foreach ($allLH as $key => $value) { ?>
+        <?php 
+        $trangthai = '';
+          extract($value);
+          if($value['trang_thai'] == 11){
+            $trangthai = "Đã liên hệ với khách hàng";
+          }elseif($value['trang_thai'] == 0){
+            $trangthai = "Chưa liên hệ với khách hàng";
+          }
+        ?>
         <tr>
             <td><?php echo $value['id'] ?></td>
             <td><?php echo $value['ten'] ?></td>
             <td><?php echo $value['email'] ?></td>
             <td><?php echo $value['noi_dung'] ?></td>
+            <td><?php echo $trangthai ?></td>
             <td>
               <a href="formupdateLH&id={{$value['id']}}"><input type="submit" name="suatk" value="Edit" class="styled-button"></a>
             </td>
@@ -159,7 +170,6 @@
       <?php } ?>
     </tbody>
   </table>
-  <br> <br><a href="formadddm"><input type="submit" value="Thêm mới" class="styled-button"></a>
 </div>
 
 

@@ -92,6 +92,14 @@ class AdminModel extends AdminBaseModel
         $sql = "SELECT *FROM lienhe";
         return $this->getAllData($sql);
     }
+    function getOneLienHe($id){
+        $sql = "SELECT * FROM lienhe WHERE id = '$id' ";
+        return $this->getRowData($sql);
+    }
+    function updateLienHe($id){
+        $sql = "UPDATE lienhe SET trang_thai = 11 WHERE id = '$id' ";
+        return $this->getRowData($sql);
+    }
     //Hóa đơn
     private $ttdh = [
         '0' => "Chờ xác nhận",

@@ -162,9 +162,18 @@
            $allLH =  $this->model->getAllLienHe();
             return $this->render('Admin.layout.lienhe.list', ['allLH' => $allLH]);
         }
-        function formupdateLH(){
-            return $this->render('Admin.layout.lienhe.update');
+        function updateLH(){
+            if(isset($_POST['updateLH'])){
+                $this->model->updateLienHe($_POST['id'], $_POST['lienhe']);
+                header("Location: lienhe");
+            }
         }
+        function formupdateLH(){
+            if(isset($_GET['id'])){
+            $getOneLienHe = $this->model->getOneLienHe($_GET['id']);
+            return $this->render('Admin.layout.lienhe.update', ['getOneLienHe' => $getOneLienHe]);
+        }
+    }
         function formhoadon(){
             $ttdh = $this->model->getTtdh();
             $getAllHD = $this->model->getAllHoaDon();

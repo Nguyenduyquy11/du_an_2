@@ -173,25 +173,25 @@
  <tbody>
  <?php foreach ($getAllHD as $key => $value) { 
  extract($value);
- if($trang_thai == 0){
+ if($value['trang_thai'] == 0){
  $trangthai = 'Chờ xác nhận';
  }
- elseif($trang_thai == 1){
+ elseif($value['trang_thai'] == 1){
  $trangthai = 'Đã xác nhận';
  }
- elseif($trang_thai == 2){
+ elseif($value['trang_thai'] == 2){
  $trangthai = 'Đang giao hàng';
  }
- elseif($trang_thai == 3){
+ elseif($value['trang_thai'] == 3){
  $trangthai = 'Đã giao hàng';
  }
- elseif($trang_thai == 4){
+ elseif($value['trang_thai'] == 4){
  $trangthai = 'Giao hàng thành công';
  }
- elseif($trang_thai == 5){
+ elseif($value['trang_thai'] == 5){
  $trangthai = 'Đơn hàng đã hủy';
  }
- if($pt_thanh_toan == 0){
+ if($value['pt_thanh_toan'] == 0){
  $pttt = 'Thanh toán khi nhận hàng';
  }
 

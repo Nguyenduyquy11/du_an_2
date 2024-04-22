@@ -256,6 +256,24 @@ class ClientController extends ClientBaseController
             return $this->render('Client.layout.giohang.donhangct', ['getAllDM' => $getAllDM, 'getOneHoaDon' => $getOneHoaDon, 'getOneHoaDonCt' => $getOneHoaDonCt]);
         }
     }
+    function huyhd(){
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $this->modelClient->huyDonHang($id);
+            echo "<script>
+                    window.location = '{$_SERVER['HTTP_REFERER']}'
+                 </script>";
+        }
+    }
+    function danhanhang(){
+        if(isset($_GET['id'])){
+            $id = $_GET['id'];
+            $this->modelClient->ghThanhCong($id);
+            echo "<script> 
+                    window.location = '{$_SERVER['HTTP_REFERER']}'
+                </script>";
+        }
+    }
     function addbinhluan()
     {
         if (isset($_POST['binhluan'])) {

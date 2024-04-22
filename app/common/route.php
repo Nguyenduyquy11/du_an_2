@@ -37,6 +37,7 @@ $router->get('deleteSP', [App\controller\Admin\AdminController::class, 'deleteSP
 //Admin-Liên hệ
 $router->get('lienhe', [App\controller\Admin\AdminController::class, 'alllienhe']);
 $router->get('formupdateLH', [App\controller\Admin\AdminController::class, 'formupdateLH']);
+$router->post('updateLH', [App\controller\Admin\AdminController::class, 'updateLH']);
 
 //Admin-Chức vụ
 $router->get('chucvu', [App\controller\Admin\AdminController::class, 'getAllCV']);
@@ -77,6 +78,11 @@ $router->get('formthanhtoan', [App\controller\Client\ClientController::class, 'f
 $router->post('thanhtoan', [App\controller\Client\ClientController::class, 'addHoaDon']);
 $router->get('mycart', [App\controller\Client\ClientController::class, 'mycart']);
 $router->get('xemcthoadon', [App\controller\Client\ClientController::class, 'ctDonHang']);
+$router->get('huyhd', [App\controller\Client\ClientController::class, 'huyhd']);
+$router->get('danhanhang', [App\controller\Client\ClientController::class, 'danhanhang']);
+
+// $router->get('donhang', [App\controller\Client\ClientController::class, 'donhang']);
+
 //Binh luan
 $router->post('binhluan', [App\controller\Client\ClientController::class, 'addbinhluan']);
 

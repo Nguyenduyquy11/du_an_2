@@ -101,6 +101,14 @@ class ClientModel extends ClientBaseModel
         return $this->getRowData($sql);
     }
     //Hóa đơn
+    function huyDonHang($id){
+        $sql = "UPDATE hoadon SET trang_thai = 5 WHERE id = '$id' ";
+        return $this->getRowData($sql);
+    }
+    function ghThanhCong($id){
+        $sql = "UPDATE hoadon SET trang_thai = 4 WHERE id = '$id' ";
+        return $this->getRowData($sql);
+    }
     function getAllHoaDon($id)
     {
         $sql = "SELECT *FROM hoadon WHERE id_nguoi_nhan = '$id'";
@@ -128,34 +136,6 @@ class ClientModel extends ClientBaseModel
         $sql .= "ORDER BY id DESC";
         return $this->getRowData($sql);
     }
-    // function getTrangThai($variable)
-    // {
-    //     switch ($variable) {
-    //         case '0':
-    //             $tt = "Chờ xác nhận";
-    //             break;
-    //         case '1':
-    //             $tt = "Đã xác nhận";
-    //             break;
-    //         case '2':
-    //             $tt = "Đang giao hàng";
-    //             break;
-    //         case '3':
-    //             $tt = "Đã giao hàng";
-    //             break;
-    //         case '4':
-    //             $tt = "Giao hàng thành công";
-    //             break;
-    //         case '5':
-    //             $tt = "Đơn hàng đã hủy";
-    //             break;
-
-    //         default:
-    //             $tt = "Đơn hàng mới";
-    //             break;
-    //     }
-    //     return $tt;
-    // }
     //Binh luan
     function addBL($tendn, $noidung, $ngaybinhluan, $idsp, $iduser, $avtuser)
     {
@@ -164,9 +144,6 @@ class ClientModel extends ClientBaseModel
     }
     function getAllBinhLuan($idsp, $iduser)
     {
-        // $sql = "SELECT binhluan .*, taikhoan.ten_dang_nhap, taikhoan.img, sanpham.id FROM binhluan
-        // JOIN taikhoan ON binhluan.ten_nguoi_binh_luan = taikhoan.id
-        // JOIN sanpham ON binhluan.id_san_pham = sanpham.id WHERE id_san_pham = '$idsp'";
         $sql = "SELECT * FROM binhluan WHERE id_san_pham = '$idsp' AND id_user = '$iduser'";
         return $this->getAllData($sql);
     }

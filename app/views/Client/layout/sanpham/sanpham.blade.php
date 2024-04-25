@@ -89,11 +89,7 @@
                 <!-- Nút "Đăng nhập" -->
                 <?php if (isset($_SESSION['taikhoan'])) { ?>
                     <?php extract($_SESSION['taikhoan']); ?>
-
-
-
                     <ul class="navbar-nav login-btn">
-
                         <li class="nav-item">
                             <a class="nav-link" href="formgiohang"> <button class="btn btn-info">Giỏ hàng</button></a>
                         </li>
@@ -108,8 +104,6 @@
                         <li class="nav-item">
                             <a class="nav-link" href="myaccount"><button class="btn btn-info">Tài khoản</button></a>
                         </li>
-
-
                     <?php } else { ?>
                     </ul>
                     <!-- Nút "Đăng ký" -->
@@ -123,15 +117,10 @@
                     </ul>
                 <?php  } ?>
             </div>
-
         </div>
-
-
-
     </nav> <br>
-
     <div class="container-xxl">
-        <h1 class="mt-5 mb-4">Sản phẩm Mua Cho Mẹ Nghị</h1>
+        <h1 class="mt-5 mb-4">Sản phẩm</h1>
         <div class="product-wrapper row">
             <?php foreach ($dssp as $key => $value) { ?>
                 <?php extract($value); ?>
@@ -151,9 +140,6 @@
             <?php } ?>
         </div>
     </div>
-
-
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-RPPtJO3C4clI5u8sO1D4BrAKWDZO/7tNcEck6FsFwbaWuFlj7Vb5FItK9Ksgzm/r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -185,5 +171,4 @@
         </div>
     </div>
 </footer>
-
 </html>

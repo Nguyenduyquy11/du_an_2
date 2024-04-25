@@ -90,9 +90,6 @@
         <!-- Nút "Đăng nhập" -->
         <?php if (isset($_SESSION['taikhoan'])) { ?>
           <?php extract($_SESSION['taikhoan']); ?>
-
-
-
           <ul class="navbar-nav login-btn">
 
             <li class="nav-item">
@@ -177,7 +174,7 @@
                 <h5 class="card-title"><?php echo $ten_san_pham ?></h5>
               </a>
               <p class="card-text"><?php echo $mo_ta ?></p>
-              <p class="card-text"><?php echo  $gia . " <strong style='color: red;'> VNĐ</strong>" ?></p>
+              <p class="card-text"><?php echo  $gia ."<strong style='color: oranged;'>K</strong>" . " <strong style='color: red;'> VNĐ</strong>" ?></p>
               <form action="addtocart" method="post">
                 <input type="hidden" name="idsp" value="<?php echo $id ?>">
                 <input type="hidden" name="ten_san_pham" value="{{$value['ten_san_pham']}}">
